@@ -3,6 +3,9 @@ import { useState } from "react";
 
 import FeatureBlock from "./FeatureBlock";
 import FolderIcon from "./icons/Folder";
+import GenericIcon from "./icons/Generic";
+import InfoIcon from "./icons/Info";
+import DockerYamlIcon from "./icons/DockerYaml";
 
 export type FeatureTuple = [string, string];
 
@@ -10,7 +13,7 @@ export default function Example() {
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [projectName, setProjectName] = useState<string>("");
 
-  const [selectedDB, setSelectedDB] = useState<string>("");
+  const [selectedDB, setSelectedDB] = useState<string>("none");
   const [selectedFramework, setSelectedFramework] = useState<string>("");
 
   const databases: FeatureTuple[] = [
@@ -95,7 +98,45 @@ export default function Example() {
       <div className="bg-white mt-6 shadow sm:rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <div className="flex items-center">
-            <FolderIcon /> <p className="inline">{projectName}</p>
+            <FolderIcon />{" "}
+            {projectName ? (
+              <p className="inline">{projectName}</p>
+            ) : (
+              <p className="inline italic text-gray-500">my_project</p>
+            )}
+          </div>
+          <div className="ml-4">
+            <div className="flex items-center">
+              <FolderIcon /> <p className="inline">cmd</p>
+            </div>
+            <div className="flex items-center">
+              <FolderIcon /> <p className="inline">internal</p>
+            </div>
+            <div className="flex items-center">
+              <FolderIcon /> <p className="inline">tests</p>
+            </div>
+            <div className="flex items-center">
+              <GenericIcon />
+              <p className="inline">go.mod</p>
+            </div>
+            <div className="flex items-center">
+              <GenericIcon />
+              <p className="inline">go.sum</p>
+            </div>
+            <div className="flex items-center">
+              <GenericIcon />
+              <p className="inline">Makefile</p>
+            </div>
+            <div className="flex items-center">
+              <InfoIcon />
+              <p className="inline">README.md</p>
+            </div>
+            {selectedDB !== "none" ? (
+              <div className="flex items-center">
+                <DockerYamlIcon />
+                <p className="inline">docker-compose.yaml</p>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
